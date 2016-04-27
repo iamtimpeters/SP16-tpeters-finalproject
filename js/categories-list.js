@@ -17,7 +17,7 @@ $(document).ready(function(){
     		self.categories = ko.observableArray(categoriesData);
 
             self.productLink = function(list){
-                var localSource = "file:///Users/Tim/Documents/Parkland%20classes/CSC175/SP16-tpeters/final-project-resources-master/site-starter/products-list.html";    
+                var localSource = "http://parkland-csc175.github.io/SP16-tpeters-finalproject/products-list.html";    
                 var productCatId = list.id;
                 localSource += "#" + "pageNum=001&" + productCatId
                 document.location.assign(localSource);
