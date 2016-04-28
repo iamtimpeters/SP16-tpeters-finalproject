@@ -35,6 +35,10 @@ $(document).ready(function(){
     	var productsData = result.products;
 
       var totalPages = result.totalPages;
+      
+      $("#thisPage").text(pageNumber);
+
+      $("#totalPages").text(totalPages);
 
       var totalPages = parseInt(totalPages);
 
