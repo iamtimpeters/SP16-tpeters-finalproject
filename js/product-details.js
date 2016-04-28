@@ -2,8 +2,6 @@
 
 $(document).ready(function(){
     
-    twttr.widgets.load();
-    
     //var url = "https://parkland-csc175.github.io/csc175data/bestbuy/product-details-4506800.json";
 
     var urlFirstHalf = "https://api.bestbuy.com/v1/products(sku="
