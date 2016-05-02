@@ -65,6 +65,24 @@
                     </div>
                 </div>
                 
+                    <!-- Load Facebook SDK for JavaScript -->
+                <div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) return;
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+                  fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+            
+                <!-- Your like button code -->
+                <div class="fb-like" 
+                    data-href="https://parkland-csc175.github.io/SP16-tpeters-finalproject/product-details.html" 
+                    data-layout="standard" 
+                    data-action="like" 
+                    data-show-faces="true">
+                </div>
+                
                 <div>
                     <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
                     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -147,23 +165,6 @@
         </div>
     </div>
 
-    <!-- Load Facebook SDK for JavaScript -->
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-
-    <!-- Your like button code -->
-    <div class="fb-like" 
-        data-href="https://parkland-csc175.github.io/SP16-tpeters-finalproject/product-details.html" 
-        data-layout="standard" 
-        data-action="like" 
-        data-show-faces="true">
-    </div>
 
     <!-- JS -->
     <!-- this is the jQuery CDN reference. You need internet access for this file! -->
