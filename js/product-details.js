@@ -28,10 +28,60 @@ $(document).ready(function(){
 
             $("#prod_pic").attr("src", product.largeFrontImage);
 
-            //$("#comment_total").text(product.customerReviewCount + " Comments");
+            var reviewAverage = product.customerReviewAverage
 
-            $("#rating_avg").text("Average rating: " + product.customerReviewAverage + " stars");
+            if (reviewAverage != "null") {
+                $("#rating_avg").text("Average rating: " + reviewAverage + " stars");
+                reviewAverage = parseFloat(reviewAverage).toFixed(1);
+            } else {
+                reviewAverage = "N/A"
+                $("#rating_avg").text("Average rating: " + reviewAverage);
+            }
 
+            console.log(reviewAverage);
+
+            if (reviewAverage < .5) {
+                $("#star5").removeClass("glyphicon-star");
+                $("#star4").removeClass("glyphicon-star");
+                $("#star3").removeClass("glyphicon-star");
+                $("#star2").removeClass("glyphicon-star");
+                $("#star1").removeClass("glyphicon-star");
+                $("#star5").addClass("glyphicon-star-empty");
+                $("#star4").addClass("glyphicon-star-empty");
+                $("#star3").addClass("glyphicon-star-empty");
+                $("#star2").addClass("glyphicon-star-empty");
+                $("#star1").addClass("glyphicon-star-empty");
+            } else if (reviewAverage < 1.5 && reviewAverage >= .5) {
+                $("#star5").removeClass("glyphicon-star");
+                $("#star4").removeClass("glyphicon-star");
+                $("#star3").removeClass("glyphicon-star");
+                $("#star2").removeClass("glyphicon-star");
+                $("#star5").addClass("glyphicon-star-empty");
+                $("#star4").addClass("glyphicon-star-empty");
+                $("#star3").addClass("glyphicon-star-empty");
+                $("#star2").addClass("glyphicon-star-empty");
+            } else if (reviewAverage < 2.5 && reviewAverage >= 1.5) {
+                $("#star5").removeClass("glyphicon-star");
+                $("#star4").removeClass("glyphicon-star");
+                $("#star3").removeClass("glyphicon-star");
+                $("#star5").addClass("glyphicon-star-empty");
+                $("#star4").addClass("glyphicon-star-empty");
+                $("#star3").addClass("glyphicon-star-empty");
+            } else if (reviewAverage < 3.5 && reviewAverage >= 2.5) {
+                $("#star5").removeClass("glyphicon-star");
+                $("#star4").removeClass("glyphicon-star");
+                $("#star5").addClass("glyphicon-star-empty");
+                $("#star4").addClass("glyphicon-star-empty");
+            } else if (reviewAverage < 4.5 && reviewAverage >= 3.5) {
+                $("#star5").removeClass("glyphicon-star");
+                $("#star5").addClass("glyphicon-star-empty");
+            } else if (reviewAverage == "N/A") {
+                $("#star5").hide();
+                $("#star4").hide();
+                $("#star3").hide();
+                $("#star2").hide();
+                $("#star1").hide();
+            };
         });
 
     });
@@ -44,13 +94,25 @@ $(document).ready(function(){
 
     $.get(reviewsUrl, /* callback */ function(reviewsResult){
 
-        var pageNumber = reviewsResult.currentPage
+        var totalComments = reviewsResult.total;
+
+        console.log(totalComments);
+
+        $("#commentQuantity").text(totalComments);
+
+        var pageNumber = reviewsResult.currentPage;
 
         var pageNumber = parseInt(pageNumber);
 
         console.log(pageNumber);
 
-        var pageTotal = reviewsResult.totalPages
+        var pageTotal = parseInt(reviewsResult.totalPages)
+
+        if (pageTotal == 0) {
+            pageNumber = 0
+        };
+
+        localStorage.setItem("detailsPageNumber", pageNumber);
 
         console.log(pageTotal);
 
@@ -74,11 +136,13 @@ $(document).ready(function(){
 
             self.nextPage = function(){
 
-                pageNumber = pageNumber + 1
+                var currentPageNum = parseInt(localStorage.getItem("detailsPageNumber"))
 
-                console.log(pageNumber)
+                currentPageNum = currentPageNum + 1
 
-                nextReviewsUrl = reviewsUrl + "&page=" + pageNumber
+                console.log(currentPageNum)
+
+                nextReviewsUrl = reviewsUrl + "&page=" + currentPageNum
 
                 $.get(nextReviewsUrl, /* callback */ function(nextReviewsPage){
 
@@ -94,7 +158,7 @@ $(document).ready(function(){
 
                     };
 
-                    $("#thisPage").text(pageNumber);
+                    $("#thisPage").text(currentPageNum);
 
                     $('html, body').animate({
                         scrollTop: $("#commentHeader").offset().top
@@ -102,23 +166,27 @@ $(document).ready(function(){
 
                 });
 
-                if (pageNumber != 1) {
+                if (currentPageNum != 1) {
                     $("#btn-prev").show();
                 };
 
-                if (pageNumber == pageTotal) {
+                if (currentPageNum == pageTotal) {
                     $("#btn-next").hide();
                 };
+
+                localStorage.setItem("detailsPageNumber", currentPageNum);
 
             };
 
             self.prevPage = function(){
 
-                pageNumber = pageNumber - 1
+                var currentPageNum = parseInt(localStorage.getItem("detailsPageNumber"))
 
-                console.log(pageNumber)
+                currentPageNum = currentPageNum - 1
 
-                prevReviewsUrl = reviewsUrl + "&page=" + pageNumber
+                console.log(currentPageNum)
+
+                prevReviewsUrl = reviewsUrl + "&page=" + currentPageNum
 
                 $.get(prevReviewsUrl, /* callback */ function(prevReviewsPage){
 
@@ -134,7 +202,7 @@ $(document).ready(function(){
 
                     };
 
-                    $("#thisPage").text(pageNumber);
+                    $("#thisPage").text(currentPageNum);
 
                     $('html, body').animate({
                         scrollTop: $("#commentHeader").offset().top
@@ -142,9 +210,11 @@ $(document).ready(function(){
 
                 });
 
-                if (pageNumber = 1) {
+                if (currentPageNum == 1) {
                     $("#btn-prev").hide();
                 };
+
+                localStorage.setItem("detailsPageNumber", currentPageNum);
 
             };
 
