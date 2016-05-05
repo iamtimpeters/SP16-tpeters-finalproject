@@ -18,7 +18,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Parkland Bookstore</a>
+			<a class="navbar-brand" href="index.html">Parkland Bookstore</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -53,7 +53,7 @@
 						</td>
 						<td data-bind="text: manufacturer"></td>
 						<td data-bind="text: name"></td>
-						<td data-bind="text: regularPrice"></td>
+						<td>$<span data-bind="text: regularPrice"></span></td>
 						<td>
 							<a data-bind="click: $parent.productDetailLink"href="">
 								Click to View
@@ -64,19 +64,17 @@
 				</tbody>
 			</table>
 			
-		</div>
-			
-	<div class="col-sm-12">
+			<div class="col-sm-12">
                 <button id="btn-prev" class="btn btn-primary" type="button" data-bind="click: prevPage">Previous Page</button>
                 <button id="btn-next" class="btn btn-primary" type="button" data-bind="click: nextPage">Next Page</button
-        </div>
+            </div>
             <br><br>
-        <div class="col-sm-12">
+            <div class="col-sm-12">
                 <p>Page <span id="thisPage"></span> of <span id="totalPages"></span>
-	        </p>
-     	</div>
+	            </p>
+     		</div>
 
-	
+		</div>
 	</div>
 	
 </div>
