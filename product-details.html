@@ -13,6 +13,10 @@
     <meta property="og:description" content="Your description" />
     <meta property="og:image" content="http://www.your-domain.com/path/image.jpg" />
 
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 
@@ -28,7 +32,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Parkland Bookstore</a>
+                <a class="navbar-brand" href="index.html">Parkland Bookstore</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,72 +50,54 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="thumbnail" data-bind="foreach: details">
-                    <img class="img-responsive" data-bind="attr: { src: image}" alt="">
+                <div class="thumbnail">
+                    <img id="prod_pic" class="img-responsive" alt=""></img>
                     <div class="caption-full">
-                        <h4 class="pull-right" data-bind="text: regularPrice"></h4>
-                        <h4><a href="#" data-bind="text: name"></a></h4>
-
+                        <h4 id="price"class="pull-right"></h4>
+                        <h4 id="prod_name"><a href="#"></a></h4>
                     </div>
+
+                    <br>
+
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
+                         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                         <br><br>
                     <div class="ratings">
-                        <p class="pull-right">3 comments</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span> 4.0 stars
+                        <p id="comment_total" class="pull-right"></p>
+                        <p id ="rating_avg">
                         </p>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                        
                     </div>
                 </div>
 
                 <div class="well">
 
-                    <div class="text-right">
-                        <a href="#leave-a-comment" class="btn btn-success">Leave a Comment</a>
-                    </div>
-
+                    <h2 id="commentHeader" style="text-align: center; margin-top: 0px">Comments</h2>
                     <hr>
-
-                    <div class="row">
+                    <div class="row" data-bind="foreach: reviews">
                         <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span> Anonymous
-                            <span class="pull-right">10 days ago</span>
-                            <p>This product was great in terms of quality. I would definitely buy another!</p>
+                            <p class="pull-right"><b>Comment left on:</b><br><span data-bind="text: submissionTime"></span></p>
+                            <p><b>Rating:</b> <span data-bind="text: rating"></span> stars</p>
+                            <p><b>Reviewer:</b> <span data-bind="text: reviewer[0].name"></span></p>
+                            <p data-bind="text: comment"></p>
+                            <hr>
                         </div>
                     </div>
-
-                    <hr>
-
                     <div class="row">
                         <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span> Anonymous
-                            <span class="pull-right">12 days ago</span>
-                            <p>I've alredy ordered another one!</p>
+                        <button id="btn-prev" class="btn btn-primary" type="button" style="display: none" data-bind="click: prevPage">Previous Comments</button>
+                        <button id="btn-next" class="btn btn-primary" type="button" data-bind="click: nextPage">Next Comments</button>
+                        <br><br>
+                        <p>Page <span id="thisPage"></span> of <span id="totalPages"></span>
+                        </p>
                         </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span> Anonymous
-                            <span class="pull-right">15 days ago</span>
-                            <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-                        </div>
-                    </div>
+                     </div>
 
                 </div>
             </div>
@@ -120,7 +106,7 @@
         <div class="row">
             <div id="leave-a-comment" class="col-md-12">
                 
-                <form id="product_comment_form" class="form" action="#">
+                <form id="product_comment_form" class="form" action="https://formspree.io/iamtimpeters@gmail.com" method="POST">
                     <h2>Leave a Comment</h2>
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -134,7 +120,18 @@
                         <label for="lastName">Last Name</label>
                         <input type="text" class="form-control" id="lastName" name="lastName">
                     </div>
-
+                    <div class="form-group">
+                        <label for="rating">Product Rating</label>
+                            <select name="rating" id="rating" class="form-control">
+                                <option value="">Please choose a rating.</option>
+                                <option value="0">0 Stars</option>
+                                <option value="1">1 Star</option>
+                                <option value="2">2 Stars</option>
+                                <option value="3">3 Stars</option>
+                                <option value="4">4 Stars</option>
+                                <option value="5">5 Stars</option>
+                            </select>
+                    </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
                 
@@ -148,7 +145,7 @@
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 
@@ -160,8 +157,6 @@
         data-show-faces="true">
     </div>
 
-    <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
     <!-- JS -->
     <!-- this is the jQuery CDN reference. You need internet access for this file! -->
