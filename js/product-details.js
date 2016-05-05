@@ -213,6 +213,10 @@ $(document).ready(function(){
                 if (currentPageNum == 1) {
                     $("#btn-prev").hide();
                 };
+                
+                if (currentPageNum < pageTotal) {
+                    $("#btn-next").show();
+                };
 
                 localStorage.setItem("detailsPageNumber", currentPageNum);
 
