@@ -38,7 +38,6 @@ $(document).ready(function(){
 
         product.manufacturer = product.manufacturer || '';
 
-
       });
 
       var productsData = result.products;
