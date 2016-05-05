@@ -66,7 +66,7 @@ $(document).ready(function(){
     		self.products = ko.observableArray(productsData);
 
             self.productDetailLink = function(products){
-                var localSource = "file:///Users/Tim/Documents/Parkland%20classes/CSC175/SP16-tpeters-finalproject/product-details.html";    
+                var localSource = "http://parkland-csc175.github.io/SP16-tpeters-finalproject/product-details.html";    
                 var productSku = products.sku;
                 localSource += "#" + productSku
                 console.log(document.location.hash);
