@@ -22,8 +22,10 @@ $(document).ready(function(){
 
     console.log(pageNumber);
 
-    var urlSecondPart = ")?apiKey=zap8x2yv8ryc6jc9bet42dkp&sort=name.asc&page="
+    var apiKey = localStorage.getItem("BEST_BUY_API_KEY") 
 
+    var urlSecondPart = ")?apiKey=" + apiKey + "&sort=name.asc&page="
+    
     var urlThirdPart = "&format=json"
     
     var url = urlFirstPart + productCategory + urlSecondPart + pageNumber + urlThirdPart;
@@ -32,10 +34,17 @@ $(document).ready(function(){
 
     $.get(url, /* callback */ function(result){
 
-    	var productsData = result.products;
+      result.products.forEach(function(product){
+
+        product.manufacturer = product.manufacturer || '';
+
+
+      });
+
+      var productsData = result.products;
 
       var totalPages = result.totalPages;
-      
+
       $("#thisPage").text(pageNumber);
 
       $("#totalPages").text(totalPages);
@@ -57,7 +66,7 @@ $(document).ready(function(){
     		self.products = ko.observableArray(productsData);
 
             self.productDetailLink = function(products){
-                var localSource = "http://parkland-csc175.github.io/SP16-tpeters-finalproject/product-details.html";    
+                var localSource = "file:///Users/Tim/Documents/Parkland%20classes/CSC175/SP16-tpeters-finalproject/product-details.html";    
                 var productSku = products.sku;
                 localSource += "#" + productSku
                 console.log(document.location.hash);
