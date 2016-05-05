@@ -30,7 +30,7 @@ $(document).ready(function(){
 
             var reviewAverage = product.customerReviewAverage
 
-            if (reviewAverage != null) {
+            if (reviewAverage) {
                 $("#rating_avg").text("Average rating: " + reviewAverage + " stars");
                 reviewAverage = parseFloat(reviewAverage).toFixed(1);
             } else {
