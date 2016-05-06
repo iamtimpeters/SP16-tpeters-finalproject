@@ -27,6 +27,10 @@ $(document).ready(function(){
             $("#prod_name").text(product.name);
 
             $("#prod_pic").attr("src", product.largeFrontImage);
+            
+            if (!product.largeFrontImage){
+                $("#prod_pic").attr("src", product.largeImage);
+            };
 
             var reviewAverage = product.customerReviewAverage
 
@@ -93,6 +97,24 @@ $(document).ready(function(){
     console.log(reviewsUrl); 
 
     $.get(reviewsUrl, /* callback */ function(reviewsResult){
+        
+        reviewsResult.reviews.forEach(function(reviews){
+
+            var subTime = reviews.submissionTime;
+
+            var completed = new Date(subTime).getTime();
+
+            var now = Date.now();
+
+            var msElapsed = now - completed; // in milliseconds
+
+            var daysElapsed = (((msElapsed / 1000) / 60) / 60) / 24;
+
+            console.log(subTime);
+
+            reviews.submissionTime = daysElapsed.toFixed(0);
+
+        });
 
         var totalComments = reviewsResult.total;
 
@@ -145,6 +167,24 @@ $(document).ready(function(){
                 nextReviewsUrl = reviewsUrl + "&page=" + currentPageNum
 
                 $.get(nextReviewsUrl, /* callback */ function(nextReviewsPage){
+                    
+                    nextReviewsPage.reviews.forEach(function(reviews){
+
+                        var subTime = reviews.submissionTime;
+
+                        var completed = new Date(subTime).getTime();
+
+                        var now = Date.now();
+
+                        var msElapsed = now - completed; // in milliseconds
+
+                        var daysElapsed = (((msElapsed / 1000) / 60) / 60) / 24;
+
+                        console.log(subTime);
+
+                        reviews.submissionTime = daysElapsed.toFixed(0);
+
+                    });
 
                     var nextProductReviews = nextReviewsPage.reviews;
 
@@ -191,6 +231,24 @@ $(document).ready(function(){
                 $.get(prevReviewsUrl, /* callback */ function(prevReviewsPage){
 
                     var prevProductReviews = prevReviewsPage.reviews;
+                    
+                    prevReviewsPage.reviews.forEach(function(reviews){
+
+                        var subTime = reviews.submissionTime;
+
+                        var completed = new Date(subTime).getTime();
+
+                        var now = Date.now();
+
+                        var msElapsed = now - completed; // in milliseconds
+
+                        var daysElapsed = (((msElapsed / 1000) / 60) / 60) / 24;
+
+                        console.log(subTime);
+
+                        reviews.submissionTime = daysElapsed.toFixed(0);
+
+                    });
 
                     console.log(prevProductReviews);
 
