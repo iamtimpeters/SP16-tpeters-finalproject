@@ -92,7 +92,13 @@
                     <div class="row" data-bind="foreach: reviews">
                         <div class="col-md-12">
                             <p class="pull-right"><b>Comment left:</b><br><span data-bind="text: submissionTime"></span> days ago</p>
-                            <p><b>Rating:</b> <span data-bind="text: rating"></span> stars</p>
+                            <p><b>Rating:</b>
+                                <span class="glyphicon" data-bind="css: { 'glyphicon-star': rating > 0, 'glyphicon-star-empty': rating < 1}"></span>
+                                <span class="glyphicon" data-bind="css: { 'glyphicon-star': rating > 1, 'glyphicon-star-empty': rating < 2}"></span>
+                                <span class="glyphicon" data-bind="css: { 'glyphicon-star': rating > 2, 'glyphicon-star-empty': rating < 3}"></span>
+                                <span class="glyphicon" data-bind="css: { 'glyphicon-star': rating > 3, 'glyphicon-star-empty': rating < 4}"></span>
+                                <span class="glyphicon" data-bind="css: { 'glyphicon-star': rating > 4, 'glyphicon-star-empty': rating < 5}"></span>
+                            </p>
                             <p><b>Reviewer:</b> <span data-bind="text: reviewer[0].name"></span></p>
                             <p data-bind="text: comment"></p>
                             <hr>
@@ -133,7 +139,6 @@
                         <label for="rating">Product Rating</label>
                             <select name="rating" id="rating" class="form-control">
                                 <option value="">Please choose a rating.</option>
-                                <option value="0">0 Stars</option>
                                 <option value="1">1 Star</option>
                                 <option value="2">2 Stars</option>
                                 <option value="3">3 Stars</option>
