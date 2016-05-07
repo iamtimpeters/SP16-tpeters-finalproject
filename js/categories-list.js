@@ -22,6 +22,7 @@ $(document).ready(function(){
     		self.categories = ko.observableArray(categoriesData);
 
             self.productLink = function(list){
+                var apiKey = localStorage.getItem("BEST_BUY_API_KEY");
                 if(apiKey) {
                 var localSource = "http://parkland-csc175.github.io/SP16-tpeters-finalproject/products-list.html";    
                 var productCatId = list.id;
