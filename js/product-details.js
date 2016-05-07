@@ -292,10 +292,7 @@ $(document).ready(function(){
 
     $("#product_comment_form").validate({
         rules: {
-            "firstName": {
-                required: true
-            },
-            "lastName": {
+            "name": {
                 required: true
             },
             "email": {
@@ -310,11 +307,8 @@ $(document).ready(function(){
             }
         },
         messages: {
-            "firstName": {
-                required: "Please enter your first name."
-            },
-            "lastName": {
-                required: "Please enter your last name."
+            "name": {
+                required: "Please enter your name."
             },
             "email": {
                 required: "Please enter an email address.",
