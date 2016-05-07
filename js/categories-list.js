@@ -22,10 +22,16 @@ $(document).ready(function(){
     		self.categories = ko.observableArray(categoriesData);
 
             self.productLink = function(list){
-                var localSource = "file:///Users/Tim/Documents/Parkland%20classes/CSC175/SP16-tpeters-finalproject/products-list.html";    
-                var productCatId = list.id;
-                localSource += "#" + "pageNum=001&" + productCatId
-                document.location.assign(localSource);
+                var apiKey = localStorage.getItem("BEST_BUY_API_KEY");
+                if(apiKey) {
+                    var localSource = "file:///Users/Tim/Documents/Parkland%20classes/CSC175/SP16-tpeters-finalproject/products-list.html";    
+                    var productCatId = list.id;
+                    localSource += "#" + "pageNum=001&" + productCatId
+                    document.location.assign(localSource);
+                } else {
+                    alert("Please enter an API key.");
+                }
+                
             };
 
     	};
