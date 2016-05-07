@@ -113,6 +113,8 @@ $(document).ready(function(){
             console.log(subTime);
 
             reviews.submissionTime = daysElapsed.toFixed(0);
+            
+            reviews.rating = parseInt(reviews.rating);
 
         });
 
