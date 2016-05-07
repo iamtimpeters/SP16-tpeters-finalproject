@@ -5,6 +5,8 @@ $(document).ready(function(){
     var urlFirstHalf = "https://api.bestbuy.com/v1/products(sku="
     
     var productSku = document.location.hash.slice(1)
+    
+    $("#productIdForm").text("Product Id: " + productSku);
 
     var apiKey = localStorage.getItem("BEST_BUY_API_KEY")
     
