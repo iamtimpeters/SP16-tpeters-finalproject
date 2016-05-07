@@ -28,6 +28,10 @@ $(document).ready(function(){
 
             $("#prod_pic").attr("src", product.largeFrontImage);
 
+            if (!product.largeFrontImage){
+                $("#prod_pic").attr("src", product.largeImage);
+            };
+
             var reviewAverage = product.customerReviewAverage
 
             if (reviewAverage != "null") {
@@ -94,6 +98,26 @@ $(document).ready(function(){
 
     $.get(reviewsUrl, /* callback */ function(reviewsResult){
 
+        reviewsResult.reviews.forEach(function(reviews){
+
+            var subTime = reviews.submissionTime;
+
+            var completed = new Date(subTime).getTime();
+
+            var now = Date.now();
+
+            var msElapsed = now - completed; // in milliseconds
+
+            var daysElapsed = (((msElapsed / 1000) / 60) / 60) / 24;
+
+            console.log(subTime);
+
+            reviews.submissionTime = daysElapsed.toFixed(0);
+
+            reviews.rating = parseInt(reviews.rating);
+
+        });
+
         var totalComments = reviewsResult.total;
 
         console.log(totalComments);
@@ -134,6 +158,18 @@ $(document).ready(function(){
 
     		self.reviews = ko.observableArray(productReviews);
 
+            /*self.starStatus = ko.pureComputed(function(){
+
+                reviewsResult.reviews.forEach(function(reviews){
+
+                    var rating = parseInt(reviews.rating);
+
+                    rating > 1 ? "glyphicon-star-empty" : "glyphicon-star";
+
+                });
+
+            });*/
+
             self.nextPage = function(){
 
                 var currentPageNum = parseInt(localStorage.getItem("detailsPageNumber"))
@@ -145,6 +181,24 @@ $(document).ready(function(){
                 nextReviewsUrl = reviewsUrl + "&page=" + currentPageNum
 
                 $.get(nextReviewsUrl, /* callback */ function(nextReviewsPage){
+
+                    nextReviewsPage.reviews.forEach(function(reviews){
+
+                        var subTime = reviews.submissionTime;
+
+                        var completed = new Date(subTime).getTime();
+
+                        var now = Date.now();
+
+                        var msElapsed = now - completed; // in milliseconds
+
+                        var daysElapsed = (((msElapsed / 1000) / 60) / 60) / 24;
+
+                        console.log(subTime);
+
+                        reviews.submissionTime = daysElapsed.toFixed(0);
+
+                    });
 
                     var nextProductReviews = nextReviewsPage.reviews;
 
@@ -190,6 +244,24 @@ $(document).ready(function(){
 
                 $.get(prevReviewsUrl, /* callback */ function(prevReviewsPage){
 
+                    prevReviewsPage.reviews.forEach(function(reviews){
+
+                        var subTime = reviews.submissionTime;
+
+                        var completed = new Date(subTime).getTime();
+
+                        var now = Date.now();
+
+                        var msElapsed = now - completed; // in milliseconds
+
+                        var daysElapsed = (((msElapsed / 1000) / 60) / 60) / 24;
+
+                        console.log(subTime);
+
+                        reviews.submissionTime = daysElapsed.toFixed(0);
+
+                    });
+
                     var prevProductReviews = prevReviewsPage.reviews;
 
                     console.log(prevProductReviews);
@@ -214,6 +286,10 @@ $(document).ready(function(){
                     $("#btn-prev").hide();
                 };
 
+                if (currentPageNum < pageTotal) {
+                    $("#btn-next").show();
+                };
+
                 localStorage.setItem("detailsPageNumber", currentPageNum);
 
             };
@@ -223,6 +299,8 @@ $(document).ready(function(){
     ko.applyBindings(new AddingProductReviews());
 
     });
+
+    $("#starSpace").addClass("Testing");
 
     $("#product_comment_form").validate({
         rules: {

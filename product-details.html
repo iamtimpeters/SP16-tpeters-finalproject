@@ -68,8 +68,7 @@
                         <p id ="rating_avg">
                         </p>
                             <span class="glyphicon glyphicon-star" id="star1"></span>
-                            <span class="glyphicon glyphicon-star"
-                             id="star2"></span>
+                            <span class="glyphicon glyphicon-star" id="star2"></span>
                             <span class="glyphicon glyphicon-star" id="star3"></span>
                             <span class="glyphicon glyphicon-star" id="star4"></span>
                             <span class="glyphicon glyphicon-star" id="star5"></span>
@@ -84,8 +83,14 @@
                     <hr>
                     <div class="row" data-bind="foreach: reviews">
                         <div class="col-md-12">
-                            <p class="pull-right"><b>Comment left on:</b><br><span data-bind="text: submissionTime"></span></p>
-                            <p><b>Rating:</b> <span data-bind="text: rating"></span> stars</p>
+                            <p class="pull-right"><b>Comment left:</b><br><span data-bind="text: submissionTime"></span> days ago</p>
+                            <p><b>Rating: </b> 
+                                <span class="glyphicon" data-bind="css: { 'glyphicon-star': rating > 0, 'glyphicon-star-empty': rating < 1}"></span>
+                                <span class="glyphicon" data-bind="css: { 'glyphicon-star': rating > 1, 'glyphicon-star-empty': rating < 2}"></span>
+                                <span class="glyphicon" data-bind="css: { 'glyphicon-star': rating > 2, 'glyphicon-star-empty': rating < 3}"></span>
+                                <span class="glyphicon" data-bind="css: { 'glyphicon-star': rating > 3, 'glyphicon-star-empty': rating < 4}"></span>
+                                <span class="glyphicon" data-bind="css: { 'glyphicon-star': rating > 4, 'glyphicon-star-empty': rating < 5}"></span>
+                            </p>
                             <p><b>Reviewer:</b> <span data-bind="text: reviewer[0].name"></span></p>
                             <p data-bind="text: comment"></p>
                             <hr>
@@ -99,7 +104,7 @@
                         <p>Page <span id="thisPage"></span> of <span id="totalPages"></span>
                         </p>
                         </div>
-                     </div>
+                    </div>
 
                 </div>
             </div>
@@ -131,7 +136,6 @@
                                 <option value="2">2 Stars</option>
                                 <option value="3">3 Stars</option>
                                 <option value="4">4 Stars</option>
-                                <option value="5">5 Stars</option>
                             </select>
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
