@@ -302,6 +302,9 @@ $(document).ready(function(){
             },
             "rating": {
                 required: true
+            },
+            "comment": {
+                required: true
             }
         },
         messages: {
@@ -317,6 +320,9 @@ $(document).ready(function(){
             },
             "rating":{
                 required: "Please rate the product."
+            },
+            "comment": {
+                required: "Please enter a comment."
             }
         }
     });
