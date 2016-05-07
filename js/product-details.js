@@ -6,7 +6,7 @@ $(document).ready(function(){
     
     var productSku = document.location.hash.slice(1)
     
-    $("#productIdForm").text("Product Id: " + productSku);
+    $("#productIdForm").attr("value", productSku)
 
     var apiKey = localStorage.getItem("BEST_BUY_API_KEY")
     
