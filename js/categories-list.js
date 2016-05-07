@@ -22,10 +22,14 @@ $(document).ready(function(){
     		self.categories = ko.observableArray(categoriesData);
 
             self.productLink = function(list){
+                if(apiKey) {
                 var localSource = "http://parkland-csc175.github.io/SP16-tpeters-finalproject/products-list.html";    
                 var productCatId = list.id;
                 localSource += "#" + "pageNum=001&" + productCatId
                 document.location.assign(localSource);
+                } else {
+                    alert("Please enter an API key.");
+                };
             };
 
     	};
