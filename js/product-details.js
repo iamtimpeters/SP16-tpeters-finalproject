@@ -6,6 +6,8 @@ $(document).ready(function(){
     
     var productSku = document.location.hash.slice(1)
 
+    $("#productIdForm").attr("value", productSku)
+
     var apiKey = localStorage.getItem("BEST_BUY_API_KEY")
     
     var urlSecondHalf = ")?format=json&apiKey=" + apiKey
@@ -158,18 +160,6 @@ $(document).ready(function(){
 
     		self.reviews = ko.observableArray(productReviews);
 
-            /*self.starStatus = ko.pureComputed(function(){
-
-                reviewsResult.reviews.forEach(function(reviews){
-
-                    var rating = parseInt(reviews.rating);
-
-                    rating > 1 ? "glyphicon-star-empty" : "glyphicon-star";
-
-                });
-
-            });*/
-
             self.nextPage = function(){
 
                 var currentPageNum = parseInt(localStorage.getItem("detailsPageNumber"))
@@ -316,6 +306,9 @@ $(document).ready(function(){
             },
             "rating": {
                 required: true
+            },
+            "comment": {
+                required: true
             }
         },
         messages: {
@@ -331,6 +324,9 @@ $(document).ready(function(){
             },
             "rating":{
                 required: "Please rate the product."
+            },
+             "comment": {
+                required: "Please enter a comment."
             }
         }
     });
