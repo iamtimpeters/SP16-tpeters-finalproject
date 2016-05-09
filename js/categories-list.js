@@ -23,14 +23,16 @@ $(document).ready(function(){
 
             self.productLink = function(list){
                 var apiKey = localStorage.getItem("BEST_BUY_API_KEY");
-                if(apiKey) {
-                var localSource = "http://parkland-csc175.github.io/SP16-tpeters-finalproject/products-list.html";    
-                var productCatId = list.id;
-                localSource += "#" + "pageNum=001&" + productCatId
-                document.location.assign(localSource);
-                } else {
-                    alert("Please enter an API key.");
-                };
+                if(apiKey == "null") {
+                    alert("Please enter an API key.")
+                } else if(!apiKey) {
+                    alert("Please enter an API key.")
+                } else {    
+                    var localSource = "file:///Users/Tim/Documents/Parkland%20classes/CSC175/SP16-tpeters-finalproject/products-list.html";    
+                    var productCatId = list.id;
+                    localSource += "#" + "pageNum=001&" + productCatId
+                    document.location.assign(localSource);
+                }; 
             };
 
     	};
